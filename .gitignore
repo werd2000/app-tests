@@ -7,6 +7,7 @@
 
 # dependencies
 /node_modules
+/scr/environments
 
 # IDEs and editors
 /.idea
