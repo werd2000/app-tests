@@ -1,0 +1,88 @@
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { UsuarioService } from '../services/service.index';
+
+import { Usuario } from '../models/usuario.model';
+import { Router } from '@angular/router';
+
+import swal from 'sweetalert';
+
+@Component({
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./login.component.css']
+})
+export class RegisterComponent implements OnInit {
+
+  forma: FormGroup;
+  existe = true;
+
+  constructor(
+    public _usuarioService: UsuarioService,
+    public router: Router
+  ) { }
+
+  sonIguales(campo1: string, campo2: string) {
+    return ( grupo: FormGroup ) => {
+
+      const pass1 = grupo.controls[campo1].value;
+      const pass2 = grupo.controls[campo2].value;
+
+      if ( pass1 === pass2 ) {
+        return null;
+      }
+      return { sonIguales: true };
+    };
+  }
+
+  ngOnInit() {
+    this.forma = new FormGroup({
+      nombre: new FormControl(null, Validators.required),
+      email: new FormControl( null, [Validators.required, Validators.email]),
+      password: new FormControl(null, Validators.required),
+      password2: new FormControl(null, Validators.required),
+      condiciones: new FormControl(false)
+    }, {validators: this.sonIguales('password', 'password2')});
+  }
+
+  registrarUsuario() {
+
+    if (this.forma.invalid) {
+      return;
+    }
+
+    if ( !this.forma.value.condiciones ) {
+      console.log('Debe aceptar las condiciones');
+      sweetAlert('Importante', 'Debe aceptar las condiciones.', 'warning');
+      return;
+    }
+
+    const usuario = {
+      nombre: this.forma.value.nombre,
+      email: this.forma.value.email,
+      password: this.forma.value.password,
+      img: '',
+      role: 'ROLE_USER',
+      google: false,
+      _id: this.forma.value.email
+    };
+
+    this._usuarioService.existeUsuarioEmail(usuario.email)
+      .subscribe( async usu => {
+        // console.log(usu);
+        if (usu === null || usu === undefined) {
+          this.existe = false;
+          await this._usuarioService.crearUsuario(usuario)
+            .then(success => {
+              this.router.navigate(['/login']);
+              return;
+            })
+            .catch(err => console.log(err));
+        } else {
+          if ( this.existe && usu != null) {
+            swal('El usuario ya existe', usuario.email, 'error');
+          }
+        }
+      });
+  }
+}

@@ -3,7 +3,15 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebase: {
+    apiKey: 'AIzaSyDW_WLnR6G65Xu47jcfMSvymTbnYNTbIH4',
+    authDomain: 'cronosapp-12a92.firebaseapp.com',
+    databaseURL: 'https://cronosapp-12a92.firebaseio.com',
+    projectId: 'cronosapp-12a92',
+    storageBucket: 'cronosapp-12a92.appspot.com',
+    messagingSenderId: '923206693874'
+  }
 };
 
 /*

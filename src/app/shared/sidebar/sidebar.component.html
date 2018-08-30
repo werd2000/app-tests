@@ -1,0 +1,92 @@
+<!-- Sidebar  -->
+<nav id="sidebar" class="bg-info">
+
+    <div class="sidebar-header bg-primary text-center">
+        <h3>Bootstrap Sidebar</h3>
+        <strong>BS</strong>
+    </div>
+
+    <ul class="list-unstyled components sidebar">
+        <li>
+            <div class="user-view text-center">
+                <div class="background">
+                    <a routerLink="/perfil">
+                        <img class="img-fluid img-thumbnail rounded-circle user-img" [src]="usuario.img | imagen" alt="user">
+                    </a>
+                    <h4 class="name">{{ usuario.nombre }}</h4>
+                    <span class="email">{{ usuario.email }}</span>
+                </div>
+            </div>
+        </li>
+
+        <li>
+            <a [routerLink]="['/dashboard']">
+                <i class="mdi mdi-monitor-dashboard"></i>Dashboard
+            </a>
+        </li>
+
+        <li class="active">
+            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                <i class="fas fa-home"></i> Home
+            </a>
+            <ul class="collapse list-unstyled" id="homeSubmenu">
+                <li>
+                    <a href="#">Home 1</a>
+                </li>
+                <li>
+                    <a href="#">Home 2</a>
+                </li>
+                <li>
+                    <a href="#">Home 3</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fas fa-briefcase"></i> About
+            </a>
+        </li>
+        <li>
+            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                <i class="fas fa-copy"></i> Pages
+            </a>
+            <ul class="collapse list-unstyled" id="pageSubmenu">
+                <li>
+                    <a href="#">Page 1</a>
+                </li>
+                <li>
+                    <a href="#">Page 2</a>
+                </li>
+                <li>
+                    <a href="#">Page 3</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">Portfolio</a>
+        </li>
+        <li>
+            <a href="#">Contact</a>
+        </li>
+        <li>
+            <a (click)="_usuarioService.logout()" class="link" data-toggle="tooltip" title="" data-original-title="Cerrar Sesión">
+                <i class="mdi mdi-power"></i> Salir
+            </a>
+        </li>
+    </ul>
+
+</nav>
+
+<!-- Page Content  -->
+<!-- <div id="content">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+
+            <button type="button" id="sidebarCollapse" class="btn btn-info">
+                  <i class="fas fa-align-left"></i>
+                  <span>Toggle Sidebar</span>
+              </button>
+        </div>
+    </nav>
+</div> -->
