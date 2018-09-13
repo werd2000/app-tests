@@ -1,23 +1,17 @@
 <!-- Sidebar  -->
 <nav id="sidebar" class="bg-info">
-
-    <div class="sidebar-header bg-primary text-center">
-        <h3>Bootstrap Sidebar</h3>
-        <strong>BS</strong>
+    <div class="user-view text-center">
+        <div class="bg-user-view" style="background-image: url(assets/images/bg/bg1.jpg);"></div>
+        <div class="usuario">
+            <a routerLink="/perfil">
+                <img class="img-fluid img-thumbnail rounded-circle user-img" [src]="usuario.img | imagen" alt="user">
+            </a>
+            <h6 class="name">{{ usuario.nombre }}</h6>
+            <span class="email">{{ usuario.email }}</span>
+        </div>
     </div>
 
-    <ul class="list-unstyled components sidebar">
-        <li>
-            <div class="user-view text-center">
-                <div class="background">
-                    <a routerLink="/perfil">
-                        <img class="img-fluid img-thumbnail rounded-circle user-img" [src]="usuario.img | imagen" alt="user">
-                    </a>
-                    <h4 class="name">{{ usuario.nombre }}</h4>
-                    <span class="email">{{ usuario.email }}</span>
-                </div>
-            </div>
-        </li>
+    <ul class="menu-sidebar">
 
         <li>
             <a [routerLink]="['/dashboard']">
@@ -25,27 +19,32 @@
             </a>
         </li>
 
-        <li class="active">
-            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                <i class="fas fa-home"></i> Home
+        <li>
+            <a [routerLink]="['/pacientes']">
+                <i class="fa fa-user"></i>Pacientes
             </a>
-            <ul class="collapse list-unstyled" id="homeSubmenu">
-                <li>
-                    <a href="#">Home 1</a>
-                </li>
-                <li>
-                    <a href="#">Home 2</a>
-                </li>
-                <li>
-                    <a href="#">Home 3</a>
+        </li>
+
+        <li>
+            <a [routerLink]="['/tests']">
+                <i class="fa fa-book"></i>Tests
+            </a>
+        </li>
+
+        <!-- Menú dinámico -->
+        <!-- <li *ngFor="let menu of _sidebar.menu">
+            <a href="#tests" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                <i [class]="menu.icono"></i>
+                <span class="hide-menu">{{ menu.titulo }} </span>
+            </a>
+            <ul class="collapse list-unstyled" id="tests">
+                <li *ngFor="let submenu of menu.submenu">
+                    <a routerLinkActive="active" [routerLink]="[ submenu.url ]">{{ submenu.titulo }} </a>
                 </li>
             </ul>
-        </li>
-        <li>
-            <a href="#">
-                <i class="fas fa-briefcase"></i> About
-            </a>
-        </li>
+        </li> -->
+        <!-- Fin Menú dinámico -->
+
         <li>
             <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                 <i class="fas fa-copy"></i> Pages
@@ -62,12 +61,12 @@
                 </li>
             </ul>
         </li>
-        <li>
+        <!-- <li>
             <a href="#">Portfolio</a>
         </li>
         <li>
             <a href="#">Contact</a>
-        </li>
+        </li> -->
         <li>
             <a (click)="_usuarioService.logout()" class="link" data-toggle="tooltip" title="" data-original-title="Cerrar Sesión">
                 <i class="mdi mdi-power"></i> Salir

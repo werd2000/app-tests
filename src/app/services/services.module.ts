@@ -7,9 +7,10 @@ import {
   SidebarService,
 //   LoginGuard,
 //   AdminGuard,
-//   SubirArchivoService,
+  SubirArchivoService,
 //   ModalUploadService,
-//   AlumnoService,
+  PacienteService,
+  TestService,
 //   DocenteService,
 //   RolesService,
 //   ModalRolesService,
@@ -21,8 +22,6 @@ import {
 //   VerificaTokenGuard
 } from './service.index';
 import { HttpClientModule } from '@angular/common/http';
-
-
 
 @NgModule({
   imports: [
@@ -37,10 +36,10 @@ import { HttpClientModule } from '@angular/common/http';
     UsuarioService,
     // LoginGuard,
     // AdminGuard,
-    // SubirArchivoService,
+    SubirArchivoService,
     // ModalUploadService,
-    // AlumnoService,
-    // DocenteService,
+    PacienteService,
+    TestService,
     // RolesService,
     // ModalRolesService,
     // ExportPdfService,

@@ -1,7 +1,24 @@
 <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
+    <!-- <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="#">Home</a></li>
         <li class="breadcrumb-item"><a href="#">Library</a></li>
         <li class="breadcrumb-item active" aria-current="page">Data</li>
-    </ol>
+    </ol> -->
+
+    <div class="breadcrumb">
+        <div class="col-md-5 align-self-center">
+            <h5 class="text-secondary mb-0">{{ label }}</h5>
+        </div>
+        <div class="col-md-7">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <!-- <a href="javascript:void(0)"> -->
+                    <i class="fas fa-home"></i> Inicio
+                    <!-- </a> -->
+                </li>
+                <!-- <li class="breadcrumb-item">Tests</li> -->
+                <li class="breadcrumb-item active">{{ label }}</li>
+            </ol>
+        </div>
+    </div>
 </nav>

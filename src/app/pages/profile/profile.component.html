@@ -1,0 +1,72 @@
+<div class="row animated fadeIn">
+    <!-- Column -->
+    <div class="col-lg-4 col-xlg-3 col-md-5">
+        <div class="card border-success">
+            <div class="card-body">
+                <div class="m-t-30 text-center">
+                    <img *ngIf="!imagenTemp" [src]="usuario.img | imagen" class="img-circle mb-4" width="150">
+                    <img *ngIf="imagenTemp" [src]="imagenTemp" class="img-circle mb-4" width="150">
+                    <input (change)="seleccionImagen($event.target.files[0])" type="file" class="mb-3">
+                    <button (click)="cambiarImagen()" [disabled]="!imagenSubir" type="button" class="btn btn-outline-success waves-effect waves-light m-r-10">
+                      <i class="fa fa-save"></i>
+                      Actualizar foto
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Column -->
+    <!-- Column -->
+    <div class="col-lg-8 col-xlg-9 col-md-7">
+        <div class="card border-success">
+            <h4 class="card-header">
+                <i class="mdi mdi-account-edit"></i> Perfil del usuario
+            </h4>
+            <div class="card-body">
+                <form ngNativeValidate #f="ngForm" (ngSubmit)="guardar(f.value)" class="form-horizontal form-material">
+                    <div class="form-group">
+                        <mat-form-field class="w-100">
+                            <span matPrefix>
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </span>
+                            <input matInput placeholder="Nombre" [ngModel]="usuario.nombre" name="nombre" required type="text">
+                        </mat-form-field>
+                    </div>
+
+                    <mat-form-field class="w-100">
+                        <span matPrefix>
+                            <i class="fa fa-key" aria-hidden="true"></i>
+                        </span>
+                        <input matInput placeholder="Email" [ngModel]="usuario.email" name="email" required type="email">
+                    </mat-form-field>
+
+                    <mat-form-field class="w-25">
+                        <span matPrefix>
+                            <mat-icon>wc</mat-icon>
+                        </span>
+                        <mat-select placeholder="Sexo" [(ngModel)]="usuario.sexo" name="sexo">
+                            <mat-option *ngFor="let sexo of listaSexos" [value]="sexo">
+                                {{ sexo }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field class="w-50 float-right">
+                        <input matInput [matDatepicker]="picker" placeholder="Fecha de nacimiento" [(ngModel)]="usuario.fnac" name="fnac">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <button class="btn btn-outline-success btn-block">
+                              <i class="fa fa-save"></i>
+                              Actualizar Perfil</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Column -->
+</div>

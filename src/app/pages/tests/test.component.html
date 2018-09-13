@@ -1,0 +1,73 @@
+<div class="row animated fadeIn">
+    <!-- Column -->
+    <div class="col-lg-4 col-xlg-3 col-md-5">
+        <div class="card border-success" *ngIf="!cargando">
+            <div class="card-body">
+                <div class="m-t-30 text-center">
+                    <img *ngIf="!imagenTemp" [src]="test.img | imagen" class="img-circle mb-4" width="150">
+                    <img *ngIf="imagenTemp" [src]="imagenTemp" class="img-circle mb-4" width="150">
+                    <input (change)="seleccionImagen($event.target.files[0])" type="file" class="mb-3">
+                    <button (click)="cambiarImagen()" [disabled]="!imagenSubir" type="button" class="btn btn-outline-success waves-effect waves-light m-r-10">
+                  <i class="fa fa-save"></i>
+                  Actualizar foto
+                </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Column -->
+    <!-- Column -->
+    <div class="col-lg-8 col-xlg-9 col-md-7">
+        <div class="card border-success" *ngIf="!cargando">
+            <h4 class="card-header">
+                <i class="fas fa-book"></i> Datos principales del test
+            </h4>
+            <div class="card-block">
+                <h2 class="add-ct-btn">
+                    <button (click)="crearNuevo()" type="button" class="btn btn-circle btn-lg btn-danger">+</button>
+                </h2>
+                <div class="card-body">
+                    <form ngNativeValidate #f="ngForm" (ngSubmit)="guardar(f.value)" class="form-horizontal form-material">
+
+                        <mat-form-field class="w-100">
+                            <span matPrefix>
+                                <i class="fas fa-pen-nib"></i>
+                            </span>
+                            <input matInput placeholder="Nombre" [ngModel]="test.nombre" name="nombre" required type="text">
+                        </mat-form-field>
+
+                        <mat-form-field class="w-100">
+                            <span matPrefix>
+                                <i class="fas fa-pen-nib"></i>
+                            </span>
+                            <input matInput placeholder="Descripción" [ngModel]="test.descripcion" name="descripcion" type="text">
+                        </mat-form-field>
+
+                        <mat-form-field class="w-100">
+                            <span matPrefix>
+                                <i class="fas fa-pen-nib"></i>
+                            </span>
+                            <input matInput placeholder="Categoría" [ngModel]="test.categoria" name="categoria" type="text">
+                        </mat-form-field>
+
+                        <mat-form-field class="w-100">
+                            <span matPrefix>
+                                <i class="fas fa-tags"></i>
+                            </span>
+                            <input matInput placeholder="Etiqueta" [ngModel]="test.tags" name="tags" type="text">
+                        </mat-form-field>
+
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <button class="btn btn-success btn-block">
+                            <i class="fa fa-save"></i>
+                            Guardar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Column -->
+</div>

@@ -1,3 +1,98 @@
-<p>
-  dashboard works!
-</p>
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <h6 class="bg-danger text-white rounded p-2">
+            Nuevos Tests
+            <button type="button" class="close" aria-label="Close" data-toggle="collapse" data-target="#nuevosTests" aria-expanded="true" aria-controls="nuevosTests">
+                    <span aria-hidden="true">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </span>
+                </button>
+        </h6>
+    </div>
+    <div id="nuevosTests" class="col-12 show">
+
+        <div class="row p-3">
+            <div class="card border-danger col-3 p-0" *ngFor="let test of tests">
+                <a [routerLink]="['../test', test._id]">
+                    <img class="card-img-top img-fluid" [src]="test.img | imagen" width="150">
+                </a>
+                <div class="card-body">
+                    <a [routerLink]="['../test', test._id]">
+                        <h6 class="card-title">{{ test.nombre }}</h6>
+                    </a>
+                    <p class="card-text">{{ test.descripcion }}<br> {{ test.categoria }}</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <h6 class="bg-primary text-white rounded p-2">
+            Mis Tests
+            <button type="button" class="close" aria-label="Close" data-toggle="collapse" data-target="#misTests" aria-expanded="true" aria-controls="misTests">
+                <span aria-hidden="true">
+                    <i class="fas fa-ellipsis-h"></i>
+                </span>
+            </button>
+        </h6>
+    </div>
+    <div id="misTests" class="col-12 show">
+        <div class="row p-3">
+            <div class="card border-primary col-3 p-0" *ngFor="let test of tests">
+                <div class="card-body">
+                    <a [routerLink]="['../test', test._id]">
+                        <img class="card-img-top img-fluid" [src]="test.img | imagen" width="150">
+                    </a>
+                    <div class="card-body">
+                        <a [routerLink]="['../test', test._id]">
+                            <h6 class="card-title">{{ test.nombre }}</h6>
+                        </a>
+                        <p class="card-text">{{ test.descripcion }}<br> {{ test.categoria }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Last updated 3 mins ago</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <h6 class="bg-success text-white rounded p-2">
+            Mis Pacientes
+            <button type="button" class="close" aria-label="Close" data-toggle="collapse" data-target="#misPacientes" aria-expanded="false" aria-controls="misPacientes">
+                <span aria-hidden="true">
+                    <i class="fas fa-ellipsis-h"></i>
+                </span>
+            </button>
+        </h6>
+    </div>
+    <div id="misPacientes" class="col-12 show">
+
+        <div class="row p-3">
+            <div class="card border-success col-2 p-0" *ngFor="let pac of pacientes">
+                <a [routerLink]="['../paciente', pac._id]">
+                    <img class="card-img-top img-fluid" [src]="pac.img | imagen" width="150">
+                </a>
+                <div class="card-body">
+                    <a [routerLink]="['../paciente', pac._id]">
+                        <h6 class="card-title">{{ pac.apellido }} {{ pac.nombre }}</h6>
+                    </a>
+                    <p class="card-text">{{ pac.tipo_doc }} {{ pac.nro_doc }}<br> {{ pac.fecha_nac }}</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

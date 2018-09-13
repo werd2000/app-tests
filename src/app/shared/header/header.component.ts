@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UsuarioService } from '../../services/usuario/usuario.service';
+import { Usuario } from '../../models/usuario.model';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  mostrar = false;
+  usuario: Usuario;
+
+  constructor(
+    public _usuarioService: UsuarioService
+  ) { }
 
   ngOnInit() {
+    this.usuario = this._usuarioService.usuario;
+  }
+
+  mostrarMenuUsuario(e) {
+    this.mostrar = true;
+  }
+
+  ocultarMenuUsuario( e ) {
+    if (this.mostrar === false) {
+      this.mostrar = true;
+      // console.log(this.mostrar);
+    } else {
+      this.mostrar = false;
+      // console.log(this.mostrar);
+    }
   }
 
 }

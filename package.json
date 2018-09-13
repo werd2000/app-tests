@@ -24,6 +24,7 @@
     "@angular/router": "^6.0.3",
     "@mdi/font": "^2.6.95",
     "angularfire2": "^5.0.0-rc.12",
+    "animate.css": "^3.7.0",
     "core-js": "^2.5.4",
     "firebase": "^5.4.1",
     "rxjs": "^6.0.0",

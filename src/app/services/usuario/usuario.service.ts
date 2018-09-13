@@ -6,9 +6,9 @@ import { map } from 'rxjs/operators';
 
 
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
-// import { SubirArchivoService } from '../subir-archivo/subir-archivo.service';
-// import { AngularFireAuth } from 'angularfire2/auth';
-// import { auth } from 'firebase';
+import { SubirArchivoService } from '../subir-archivo/subir-archivo.service';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { auth } from 'firebase';
 
 
 @Injectable()
@@ -24,8 +24,8 @@ export class UsuarioService {
   constructor(
     public router: Router,
     public afs: AngularFirestore,
-    // public _subirArchivoService: SubirArchivoService,
-    // public afAuth: AngularFireAuth
+    public _subirArchivoService: SubirArchivoService,
+    public afAuth: AngularFireAuth
   ) {
     this.usuariosCollection = afs.collection<Usuario>('usuarios-tests');
     this.cargarStorage();
@@ -113,8 +113,6 @@ export class UsuarioService {
           }
         }
       }));
-
-
   }
 
   // =====================================================================
@@ -140,10 +138,10 @@ export class UsuarioService {
   // Cambia la imagen de un usuario
   // =====================================================================
   cambiarImagen( archivo: File, usuario: Usuario) {
-    // this._subirArchivoService.subirArchivo(archivo, 'usuario', usuario)
-    //   .then((resp: Usuario) => {
-    //     this.guardarStorage(resp.email, '', resp, '');
-    //     });
+    this._subirArchivoService.subirArchivo(archivo, 'usuario', usuario)
+      .then((resp: Usuario) => {
+        this.guardarStorage(resp.email, '', resp, '');
+        });
   }
 
   // =====================================================================

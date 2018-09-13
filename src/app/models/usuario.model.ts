@@ -3,9 +3,12 @@ export class Usuario {
         public nombre: string,
         public email: string,
         public password: string,
+        public sexo?: string,
+        public fnac?: string,
         public img?: string,
         public role?: string,
         public google?: boolean,
-        public _id?: string
+        public _id?: string,
+        public misTests?: string[]
     ) { }
 }

@@ -1,0 +1,103 @@
+<div class="row animated fadeIn">
+    <!-- Column -->
+    <div class="col-lg-4 col-xlg-3 col-md-5">
+        <div class="card border-success" *ngIf="!cargando">
+            <div class="card-body">
+                <div class="m-t-30 text-center">
+                    <img *ngIf="!imagenTemp" [src]="paciente.img | imagen" class="img-circle mb-4" width="150">
+                    <img *ngIf="imagenTemp" [src]="imagenTemp" class="img-circle mb-4" width="150">
+                    <input (change)="seleccionImagen($event.target.files[0])" type="file" class="mb-3">
+                    <button (click)="cambiarImagen()" [disabled]="!imagenSubir" type="button" class="btn btn-outline-success waves-effect waves-light m-r-10">
+                  <i class="fa fa-save"></i>
+                  Actualizar foto
+                </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Column -->
+    <!-- Column -->
+    <div class="col-lg-8 col-xlg-9 col-md-7">
+        <div class="card border-success" *ngIf="!cargando">
+            <h4 class="card-header">
+                <i class="fa fa-user"></i> Datos principales del paciente
+            </h4>
+            <div class="card-block">
+                <h2 class="add-ct-btn">
+                    <button (click)="crearNuevo()" type="button" class="btn btn-circle btn-lg btn-danger">+</button>
+                </h2>
+                <div class="card-body">
+                    <form ngNativeValidate #f="ngForm" (ngSubmit)="guardar(f.value)" class="form-horizontal form-material">
+                        <mat-form-field class="w-50">
+                            <span matPrefix>
+                                <i class="far fa-id-card"></i>
+                            </span>
+                            <mat-select placeholder="Tipo de documento" [(ngModel)]="paciente.tipo_doc" name="tipo_doc">
+                                <mat-option *ngFor="let tipo of listaTipoDoc" [value]="tipo">
+                                    {{ tipo }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field class="w-25 float-right">
+                            <span matPrefix>
+                                    <i class="fas fa-id-card-alt"></i>
+                                </span>
+                            <input matInput placeholder="Nro. Doc." [ngModel]="paciente.nro_doc" name="nro_doc" required type="text">
+                        </mat-form-field>
+
+                        <mat-form-field class="w-100">
+                            <span matPrefix>
+                                <i class="fas fa-user"></i>
+                            </span>
+                            <input matInput placeholder="Apellido" [ngModel]="paciente.apellido" name="apellido" required type="text">
+                        </mat-form-field>
+
+                        <mat-form-field class="w-100">
+                            <span matPrefix>
+                                <i class="far fa-user"></i>
+                            </span>
+                            <input matInput placeholder="Nombre" [ngModel]="paciente.nombre" name="nombre" required type="text">
+                        </mat-form-field>
+
+                        <mat-form-field class="w-25">
+                            <span matPrefix>
+                                <mat-icon>wc</mat-icon>
+                            </span>
+                            <mat-select placeholder="Sexo" [(ngModel)]="paciente.sexo" name="sexo">
+                                <mat-option *ngFor="let sexo of listaSexos" [value]="sexo">
+                                    {{ sexo }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field class="w-100">
+                            <span matPrefix>
+                                <i class="fas fa-globe-americas"></i>
+                            </span>
+                            <input matInput placeholder="Nacionalidad" [ngModel]="paciente.nacionalidad" name="nacionalidad" required type="text">
+                        </mat-form-field>
+
+                        <mat-form-field class="w-50">
+                            <input matInput [matDatepicker]="picker" placeholder="Fecha de nacimiento" [ngModel]="paciente.fecha_nac" name="fecha_nac">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <button class="btn btn-success btn-block">
+                            <i class="fa fa-save"></i>
+                            Guardar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Column -->
+</div>
+<!-- <app-form-domicilio [persona]="paciente" [tipo]="'pacientes'" *ngIf="!cargando && paramId!='nuevo'"></app-form-domicilio>
+<app-form-contacto [persona]="paciente" [tipo]="'pacientes'" *ngIf="!cargando && paramId!='nuevo'"></app-form-contacto>
+<app-familia [persona]="paciente" [tipo]="'pacientes'" *ngIf="!cargando && paramId!='nuevo'"></app-familia> -->

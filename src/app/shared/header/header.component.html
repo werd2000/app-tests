@@ -1,26 +1,53 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <div class="sidebar-header text-center">
+        <h3><a class="navbar-brand" href="#">My Tests</a></h3>
+    </div>
+
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+            <span class="navbar-toggler-icon"></span>
+        </button>
     <!-- <button type="button" id="sidebarCollapse" class="btn btn-info">
-        <i class="fas fa-align-left"></i>
-        <span>Toggle Sidebar</span>
-    </button> -->
-    <div class="collapse navbar-collapse" id="navbarNav">
+            <i class="fas fa-align-left"></i>
+            <span>Toggle Sidebar</span>
+        </button> -->
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" routerLink="/perfil">
+                    <i class="far fa-calendar-alt" aria-hidden="true"></i>
+                </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
+            <li class="nav-item active">
+                <a class="nav-link" routerLink="/perfil">
+                    <i class="far fa-comment-alt" aria-hidden="true"></i>
+                </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
+            <li class="nav-item active">
+                <a class="nav-link" routerLink="/perfil">
+                    <span class="fa-layers fa-fw">
+                        <i class="far fa-bell" aria-hidden="true"></i>
+                        <span class="fa-layers-counter" style="background:red">4</span>
+                    </span>
+                </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
+            <li class="nav-item active">
+                <img class="user-img-header link" [src]="usuario.img | imagen" (mouseover)="mostrarMenuUsuario($event)">
             </li>
         </ul>
+        <div class="animated flipInX shadow-sm mb-5 bg-white rounded menu-usuario" role="alert" *ngIf="mostrar" (mouseleave)="ocultarMenuUsuario($event)">
+            <ul class="nav navbar-nav" id="js-popoverContent">
+                <li class="nav-item active w-100 p-0">
+                    <a class="rounded dropdown-item" routerLink="/perfil" data-action="growl">
+                        <i class="mdi mdi-account-edit"></i> Perfil
+                    </a>
+                </li>
+                <li class="nav-item active w-100 p-0">
+                    <a class="rounded dropdown-item link" (click)="_usuarioService.logout()">
+                        <i class="mdi mdi-power"></i> Salir
+                    </a>
+                </li>
+            </ul>
+        </div>
+
     </div>
 </nav>
