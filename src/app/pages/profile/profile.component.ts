@@ -24,7 +24,6 @@ export class ProfileComponent implements OnInit {
   }
 
   guardar( usuario: Usuario ) {
-    console.log(usuario);
     this.usuario.nombre = usuario.nombre;
     // lo saco porque no debe modificar el email
     // this.usuario.email = usuario.email;

@@ -61,7 +61,6 @@ export class PacienteComponent implements OnInit {
             this.paciente = new Paciente('', '', '', '', '', '', this.usuario._id, '');
           } else {
             this.paciente = resp;
-            // this.paciente.fecha_nac = new Date(resp.fecha_nac).toISOString();
           }
           this.cargando = false;
         });
@@ -90,21 +89,20 @@ export class PacienteComponent implements OnInit {
   }
 
   guardar( paciente: Paciente ) {
-    paciente._id = paciente.nro_doc;
-    let fecha = new Date(paciente.fecha_nac).toISOString();
+    paciente._id = this.usuario._id + paciente.nro_doc;
+    const fecha = new Date(paciente.fecha_nac).toISOString();
     paciente.fecha_nac = fecha.split('T')[0];
     paciente.cargado_por = this.usuario._id;
-    fecha = new Date().toISOString();
-    paciente.actualizado = fecha.split('T')[0];
-    // console.log(fecha.toISOString());
+    const fechaHoy = new Date().toISOString();
+    paciente.actualizado = fechaHoy.split('T')[0];
     if (this.paramId === 'nuevo') {
-      this._pacienteService.existePacienteId(paciente.nro_doc)
+      this._pacienteService.existePacienteId(paciente._id)
         .subscribe( async pac => {
           if (pac === null || pac === undefined) {
             this.existe = false;
             await this._pacienteService.crearPaciente(paciente)
               .then( resp => {
-                swal('Paciente creado', `El paciente ${paciente.nombre} se creó correctamente`, 'success');
+                swal('Paciente creado', `El paciente ${ paciente.nombre } se creó correctamente`, 'success');
                 this.route.navigate([`paciente/${ paciente._id }`]);
               })
               .catch(err => console.log(err));

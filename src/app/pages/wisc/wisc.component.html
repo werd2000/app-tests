@@ -1,3 +1,42 @@
-<p>
-  wisc works!
-</p>
+<div class="row animated fadeIn p-2">
+
+    <ul class="nav nav-tabs" id="wiscTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="paciente-tab" data-toggle="tab" href="#paciente" role="tab" aria-controls="paciente" aria-selected="true">
+              Datos del Paciente
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="puntuaciones-esc-tab" data-toggle="tab" href="#puntuaciones-esc" role="tab" aria-controls="puntuaciones-esc" aria-selected="false">
+              Puntuaciones escalares
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="fortalezas-deb-tab" data-toggle="tab" href="#fortalezas-deb" role="tab" aria-controls="fortalezas-deb" aria-selected="false">
+              Fortalezas y debilidades
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="desviacion-hc-tab" data-toggle="tab" href="#desviacion-hc" role="tab" aria-controls="desviacion-hc" aria-selected="false">
+              Desviación de Habilidades Cognitivas
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="puntuaciones-ind-tab" data-toggle="tab" href="#puntuaciones-ind" role="tab" aria-controls="puntuaciones-ind" aria-selected="false">
+              Puntuaciones Índice
+            </a>
+        </li>
+    </ul>
+    <div class="tab-content" id="wiscTabContent">
+        <div class="tab-pane fade show active" id="paciente" role="tabpanel" aria-labelledby="paciente-tab">
+            <app-paciente-wisc></app-paciente-wisc>
+        </div>
+        <div class="tab-pane fade" id="puntuaciones-esc" role="tabpanel" aria-labelledby="puntuaciones-esc-tab">
+            <app-puntuaciones-escalares></app-puntuaciones-escalares>
+        </div>
+        <div class="tab-pane fade" id="fortalezas-deb" role="tabpanel" aria-labelledby="fortalezas-deb-tab">Fortalezas y debilidades</div>
+        <div class="tab-pane fade" id="desviacion-hc" role="tabpanel" aria-labelledby="desviacion-hc-tab">Desviación de Habilidades Cognitivas</div>
+        <div class="tab-pane fade" id="puntuaciones-ind" role="tabpanel" aria-labelledby="puntuaciones-ind-tab">Puntuaciones Índice</div>
+    </div>
+
+</div>

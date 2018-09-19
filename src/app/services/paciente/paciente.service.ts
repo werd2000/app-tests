@@ -73,7 +73,7 @@ export class PacienteService {
   // Actualiza un paciente por Id
   // =====================================================================
   actualizarPaciente( paciente: Paciente ) {
-    return this.afs.collection('pacientes-tests').doc(paciente.nro_doc).set(paciente);
+    return this.afs.collection('pacientes-tests').doc(paciente._id).set(paciente);
   }
 
   // =====================================================================

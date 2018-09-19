@@ -8,6 +8,7 @@ import { PacientesComponent } from './pacientes/pacientes.component';
 import { PacienteComponent } from './pacientes/paciente.component';
 import { TestsComponent } from './tests/tests.component';
 import { TestComponent } from './tests/test.component';
+import { WiscComponent } from './wisc/wisc.component';
 // import { EstablecimientoComponent } from './establecimiento/establecimiento.component';
 // import { LoginGuard, AdminGuard } from '../services/service.index';
 // import { PuestosComponent } from './puestos/puestos.component';
@@ -24,6 +25,7 @@ const pagesRoutes: Routes = [
     // Tests
     { path: 'tests', component: TestsComponent, data: { titulo: 'Administración de Tests' }},
     { path: 'test/:id', component: TestComponent, data: { titulo: 'Edición de Test' }},
+    { path: 'wisc', component: WiscComponent, data: { titulo: 'WISC' }},
     // Establecimiento
     // { path: 'establecimiento', component: EstablecimientoComponent, data: { titulo: 'Establecimiento' }},
     // { path: 'account-settings', component: AccountSettingsComponent, data: { titulo: 'Ajustes'}},

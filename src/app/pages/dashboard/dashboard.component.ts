@@ -13,9 +13,11 @@ import { forEach } from '@angular/router/src/utils/collection';
 export class DashboardComponent implements OnInit {
 
   pacientes: Paciente[];
-  tests: Test[];
+  tests: Test[] = [];
+  nuevosTests: Test[];
   cargando = false;
   totalRegistros: number;
+  totalNuevosTests: number;
   usuario: Usuario;
 
   constructor(
@@ -26,29 +28,34 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.usuario = this._usuarioService.usuario;
-    this.cargarPacientes();
+    this.cargarNuevosTests();
     this.cargarTests();
+    this.cargarPacientes();
   }
 
+  // Carga los test del usuario
   cargarTests() {
+    if (this.usuario.misTests) {
+      for (const t of this.usuario.misTests) {
+        this._testService.obtenerTestId(t)
+          .subscribe( (resp: Test) => {
+            if (resp !== undefined) {
+              this.tests.push(resp);
+            }
+          });
+      }
+    }
+  }
+
+  // Carga los tests nuevos
+  cargarNuevosTests() {
     this.cargando = true;
     this._testService.cargarTests()
       .subscribe( resp => {
-      // console.log(resp);
-      this.tests = resp;
-      this.totalRegistros = this.tests.length;
+      this.nuevosTests = resp;
+      this.totalNuevosTests = this.nuevosTests.length;
       this.cargando = false;
     });
-    if (this.usuario.role === 'ROLE_USER') {
-      this.cargarMisTest();
-    }
-  }
-
-  cargarMisTest() {
-    console.log(this.tests);
-    for (const t of this.tests) {
-      console.log(t);
-    }
   }
 
   cargarPacientes() {

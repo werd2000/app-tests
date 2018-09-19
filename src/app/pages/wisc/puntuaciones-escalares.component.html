@@ -1,0 +1,454 @@
+<div class="container p-2" *ngIf="!cargando">
+    <div class="row">
+        <div class="col-12 align-self-center">
+            <form ngNativeValidate #f="ngForm" (ngSubmit)="guardarPuntuacionesEscalares(f.value)" class="form-horizontal">
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th class="w-auto">Sub-prueba</th>
+                            <th></th>
+                            <th>Puntaje bruto</th>
+                            <th>Verbal</th>
+                            <th>Ejec.</th>
+                            <th>CV</th>
+                            <th>OP</th>
+                            <th>MO</th>
+                            <th>VP</th>
+                            <th>P. E. Grupo Ref.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Diseño con cubos</td>
+                            <td>DC</td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Semejanzas</td>
+                            <td>SE</td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Retención de dígitos</td>
+                            <td>RD</td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Conceptos con dibujos</td>
+                            <td>CD</td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Claves</td>
+                            <td>CL</td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Vocabulario</td>
+                            <td>VB</td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Sucesión de números y letras</td>
+                            <td>NL</td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Matrices</td>
+                            <td>MT</td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Comprensión</td>
+                            <td>CM</td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Búsqueda símbolos</td>
+                            <td>BS</td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>(Figuras incompletas)</td>
+                            <td>FI</td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>(Registros)</td>
+                            <td>RG</td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>(Información)</td>
+                            <td>IN</td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>(Aritmética)</td>
+                            <td>AR</td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>(Palabras en contexto)</td>
+                            <td>PC</td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <button class="btn btn-success btn-block" [disabled]="!paciente">
+                    <i class="fa fa-save"></i>
+                    Guardar</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

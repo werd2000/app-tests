@@ -1,3 +1,4 @@
+export { WiscService } from './wisc/wisc.service';
 export { TestService } from './test/test.service';
 
 // export { FamiliaService } from '../components/familia/familia.service';

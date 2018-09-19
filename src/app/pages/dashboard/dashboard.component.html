@@ -10,9 +10,8 @@
         </h6>
     </div>
     <div id="nuevosTests" class="col-12 show">
-
         <div class="row p-3">
-            <div class="card border-danger col-3 p-0" *ngFor="let test of tests">
+            <div class="card border-danger col-3 p-0" *ngFor="let test of nuevosTests">
                 <a [routerLink]="['../test', test._id]">
                     <img class="card-img-top img-fluid" [src]="test.img | imagen" width="150">
                 </a>
@@ -45,19 +44,17 @@
     <div id="misTests" class="col-12 show">
         <div class="row p-3">
             <div class="card border-primary col-3 p-0" *ngFor="let test of tests">
+                <a [routerLink]="['../test', test._id]">
+                    <img class="card-img-top img-fluid" [src]="test.img | imagen" width="150">
+                </a>
                 <div class="card-body">
                     <a [routerLink]="['../test', test._id]">
-                        <img class="card-img-top img-fluid" [src]="test.img | imagen" width="150">
+                        <h6 class="card-title">{{ test.nombre }}</h6>
                     </a>
-                    <div class="card-body">
-                        <a [routerLink]="['../test', test._id]">
-                            <h6 class="card-title">{{ test.nombre }}</h6>
-                        </a>
-                        <p class="card-text">{{ test.descripcion }}<br> {{ test.categoria }}</p>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">Last updated 3 mins ago</small>
-                    </div>
+                    <p class="card-text">{{ test.descripcion }}<br> {{ test.categoria }}</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Last updated 3 mins ago</small>
                 </div>
             </div>
         </div>

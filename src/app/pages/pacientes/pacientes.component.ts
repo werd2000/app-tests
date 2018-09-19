@@ -41,7 +41,7 @@ export class PacientesComponent implements OnInit {
   borrarPaciente(pac: Paciente) {
     swal({
       title: '¿Está seguro?',
-      text: 'Está por borrar al paciente ' + pac.nombre + ' ' + pac.nombre,
+      text: 'Está por borrar al paciente ' + pac.nombre + ' ' + pac.apellido,
       icon: 'warning',
       buttons: true,
       dangerMode: true

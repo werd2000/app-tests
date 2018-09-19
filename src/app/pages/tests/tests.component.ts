@@ -69,13 +69,20 @@ export class TestsComponent implements OnInit {
     if (this.usuario.misTests) {
       // console.log(this.usuario.misTests.findIndex(t => t === test._id));
       if (this.usuario.misTests.findIndex(t => t === test._id) >= 0) {
-        console.log('red');
         return 'red';
       } else {
-        console.log('black');
         return 'black';
       }
+    } else {
+      return 'black';
     }
+  }
+
+  borrarTest(test: Test) {
+    this._testService.borrarTest(test._id)
+      .then( () => {
+        swal('Test borrado', test.nombre, 'success');
+      });
   }
 
 }

@@ -29,7 +29,6 @@
             </div>
             <div class="card-block p-3">
 
-
                 <div class="row p-1">
                     <div class="card col-2 p-0" *ngFor="let test of tests">
                         <a [routerLink]="['../test', test._id]">
@@ -48,6 +47,12 @@
                                 </a>
                                 <a *ngIf="esMiTest(test) === 'red'" (click)="quitarMisTest(test)">
                                     <i class="fa fa-heart" aria-hidden="true" [ngStyle]="{ color: esMiTest(test) }"></i>
+                                </a>
+                                <a (click)="borrarTest(test)" class="btn">
+                                    <i class="far fa-trash-alt" style="color:red"></i>
+                                </a>
+                                <a [routerLink]="['/' + test.nombre.toLowerCase()]" routerLinkActive="router-link-active"  class="btn">
+                                    <i class="fas fa-play-circle" style="color:blue"></i>
                                 </a>
                             </small>
                         </div>
