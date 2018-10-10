@@ -7,7 +7,7 @@ import { NopagefoundComponent } from './shared/nopagefound/nopagefound.component
 import { RegisterComponent } from './login/register.component';
 import { TerminosComponent } from './login/terminos.component';
 // import { ForbiddonerrorComponent } from './shared/forbiddonerror/forbiddonerror.component';
-// import { LoginGuard } from './services/service.index';
+import { LoginGuard } from './services/service.index';
 
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent},
@@ -16,7 +16,7 @@ const appRoutes: Routes = [
     {
         path: '',
         component: PagesComponent,
-        // canActivate: [ LoginGuard ],
+        canActivate: [ LoginGuard ],
         loadChildren: './pages/pages.module#PagesModule'
     },
     // { path: 'nopermiso', component: ForbiddonerrorComponent},

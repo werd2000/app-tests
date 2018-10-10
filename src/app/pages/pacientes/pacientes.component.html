@@ -31,17 +31,17 @@
 
 
                 <div class="row p-1">
-                    <div class="card col-3 p-0" *ngFor="let pac of pacientes">
+                    <div [ngClass]="{'eliminado': !pac.estado }" class="card col-3 p-0" *ngFor="let pac of pacientes">
                         <a [routerLink]="['../paciente', pac._id]">
-                            <img class="card-img-top img-fluid" [src]="pac.img | imagen" width="150">
+                            <img class="card-img-top img-fluid" [src]="pac.img | imagen:'paciente'" width="150">
                         </a>
                         <div class="card-body">
                             <a [routerLink]="['../paciente', pac._id]">
                                 <h6 class="card-title">{{ pac.apellido }} {{ pac.nombre }}</h6>
                             </a>
-                            <p class="card-text">{{ pac.tipo_doc }} {{ pac.nro_doc }}<br> {{ pac.fecha_nac }}</p>
+                            <p class="card-text">{{ pac.tipo_doc }} {{ pac.nro_doc }}<br> {{ pac.fecha_nac | date:'dd-MM-yyyy'}}</p>
                             <p class="card-text">
-                                <small class="text-muted">Actualizado el {{ pac.actualizado }}</small>
+                                <small class="text-muted">Actualizado el {{ pac.actualizado | date:'dd-MM-yyyy' }}</small>
                             </p>
                         </div>
                         <div class="card-footer">

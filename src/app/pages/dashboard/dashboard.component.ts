@@ -29,7 +29,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.usuario = this._usuarioService.usuario;
     this.cargarNuevosTests();
-    this.cargarTests();
+    // this.cargarTests();
     this.cargarPacientes();
   }
 
@@ -61,7 +61,7 @@ export class DashboardComponent implements OnInit {
   cargarPacientes() {
     this.cargando = true;
     let pac;
-    if (this.usuario.role === 'ROLE_USER') {
+    if (this.usuario.role === 'TERAPEUTA_ROLE' || this.usuario.role === 'USER_ROLE') {
       pac = this._pacientesService.cargarPacientesTerapeuta(this.usuario._id);
     } else {
       pac = this._pacientesService.cargarPacientes();

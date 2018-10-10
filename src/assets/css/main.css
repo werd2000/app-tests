@@ -208,3 +208,8 @@ span.email {
     position: absolute;
     text-align: center;
 }
+
+.eliminado {
+    background: #dddddd;
+    opacity: 0.65;
+}

@@ -25,6 +25,7 @@
             <div class="card-body">
                 <form ngNativeValidate #f="ngForm" (ngSubmit)="guardar(f.value)" class="form-horizontal form-material">
                     <div class="form-group">
+                        <input [ngModel]="usuario._id" name="_id" type="hidden">
                         <mat-form-field class="w-100">
                             <span matPrefix>
                             <i class="fa fa-user" aria-hidden="true"></i>

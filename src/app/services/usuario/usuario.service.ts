@@ -4,53 +4,97 @@ import { Usuario } from '../../models/usuario.model';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 
-
-import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { SubirArchivoService } from '../subir-archivo/subir-archivo.service';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { auth } from 'firebase';
 
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { URL_SERVICES } from '../../config/config';
+import swal from 'sweetalert';
 
 @Injectable()
 export class UsuarioService {
 
-  private usuarioDoc: AngularFirestoreDocument<Usuario>;
-  private usuariosCollection: AngularFirestoreCollection<Usuario>;
   public usuarios: Usuario[] = [];
   public usuario: Usuario;
+  public token: string;
   public menu;
   private existe: boolean;
+  public headers;
 
   constructor(
     public router: Router,
-    public afs: AngularFirestore,
-    public _subirArchivoService: SubirArchivoService,
-    public afAuth: AngularFireAuth
-  ) {
-    this.usuariosCollection = afs.collection<Usuario>('usuarios-tests');
+    private _subirArchivoService: SubirArchivoService,
+    private http: HttpClient
+    ) {
     this.cargarStorage();
+  }
+
+  // =====================================================================
+  // Actualiza un usuario por Id
+  // =====================================================================
+  actualizarUsuario( usuario: Usuario ) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'token': this.token
+      })
+    };
+    const url = URL_SERVICES + '/usuario/' + usuario._id;
+    return this.http.put(url, usuario, httpOptions).pipe(
+      map( (res: any) => {
+        console.log(res.usuario);
+        this.guardarStorage(res.usuario._id, this.token, res.usuario, '');
+        swal('Usuario actualizado', usuario.email, 'success');
+        return res.usuario;
+      }));
+  }
+
+  // =====================================================================
+  // Guarda un test en favoritos
+  // =====================================================================
+  actualizarFavoritos( usuario: Usuario ) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'token': this.token
+      })
+    };
+    // const usuario = { misTests: idTest };
+    // usuario.misTests.push(idTest);
+    const url = URL_SERVICES + '/usuario/' + usuario._id;
+    return this.http.put(url, usuario, httpOptions).pipe(
+      map( (res: any) => {
+        console.log(res.usuario);
+    //     this.guardarStorage(res.usuario._id, this.token, res.usuario, '');
+    //     swal('Usuario actualizado', usuario.email, 'success');
+    //     return res.usuario;
+      }));
   }
 
   // =====================================================================
   // Crea un usuario
   // =====================================================================
   crearUsuario( usuario: Usuario) {
-    return this.afs.collection('usuarios-tests').doc(usuario._id).set(usuario);
+    const url = URL_SERVICES + '/usuario';
+    return this.http.post( url, usuario ).pipe(
+      map( (res: any) => {
+        swal('Usuario creado', usuario.email, 'success');
+        return res.usuario;
+      }));
   }
 
   // =====================================================================
   // Busca un usuario por email
   // =====================================================================
   existeUsuarioEmail(email: string) {
-    this.usuarioDoc = this.afs.doc<Usuario>(`usuarios-tests/${email}`);
-    return this.usuarioDoc.valueChanges();
+    // this.usuarioDoc = this.afs.doc<Usuario>(`usuarios-tests/${email}`);
+    // return this.usuarioDoc.valueChanges();
   }
 
   // =====================================================================
   // Comprueba que está logueado
   // =====================================================================
   estaLogueado() {
-    return ( this.usuario != null ) ? true : false;
+    return ( this.token.length > 5 ) ? true : false;
   }
 
   // =====================================================================
@@ -58,12 +102,14 @@ export class UsuarioService {
   // =====================================================================
   cargarStorage() {
     // todo: verificar si hay token y no usuario
-    if ( localStorage.getItem('usuario')) {
+    if ( localStorage.getItem('token')) {
       this.usuario = JSON.parse(localStorage.getItem('usuario'));
       this.menu = JSON.parse(localStorage.getItem('menu'));
+      this.token = localStorage.getItem('token');
     } else {
       this.usuario = null;
       this.menu = [];
+      this.token = '';
     }
   }
 
@@ -78,6 +124,7 @@ export class UsuarioService {
 
     this.usuario = usuario;
     this.menu = menu;
+    this.token = token;
   }
 
   // =====================================================================
@@ -103,15 +150,11 @@ export class UsuarioService {
       localStorage.removeItem('email');
     }
 
-    return this.existeUsuarioEmail(usuario.email).pipe(
-      map( (usu: any) => {
-        // console.log(usu);
-        if (usu != null) {
-          if (usu.password === usuario.password) {
-            this.usuario = usu;
-            return usu;
-          }
-        }
+    const url = URL_SERVICES + '/login';
+
+    return this.http.post( url, usuario).pipe(
+      map( (resp: any) => {
+        this.guardarStorage(resp.usuario._id, resp.token, resp.usuario, '');
       }));
   }
 
@@ -126,49 +169,56 @@ export class UsuarioService {
     }
   }
 
-
-  // =====================================================================
-  // Actualiza un usuario por Id
-  // =====================================================================
-  actualizarUsuario( usuario: Usuario ) {
-    return this.afs.collection('usuarios-tests').doc(usuario.email).set(usuario);
-  }
-
   // =====================================================================
   // Cambia la imagen de un usuario
   // =====================================================================
-  cambiarImagen( archivo: File, usuario: Usuario) {
-    this._subirArchivoService.subirArchivo(archivo, 'usuario', usuario)
-      .then((resp: Usuario) => {
-        this.guardarStorage(resp.email, '', resp, '');
-        });
+  cambiarImagen( archivo: File, id: string) {
+    this._subirArchivoService.subirArchivo(archivo, 'usuarios', id)
+      .then( (resp: any) => {
+        this.usuario.img = resp.usuario.img;
+        swal('Imagen actualizada', this.usuario.nombre, 'success');
+        this.guardarStorage(id, this.token, this.usuario, '');
+      })
+      .catch( resp => {
+        console.log(resp);
+      });
   }
 
   // =====================================================================
   // Obtiene los usuarios paginados
   // =====================================================================
   cargarUsuarios() {
-    return this.usuariosCollection.valueChanges();
+    const url = URL_SERVICES + '/usuario';
+
+    return this.http.get( url ).pipe(
+      map( (resp: any) => {
+        return resp.usuario;
+      }));
   }
 
   // =====================================================================
   // Busca un usuario por un término de búsqueda
   // =====================================================================
   buscarUsuario ( termino: string ) {
-    return this.afs.collection<Usuario>(
-      'usuarios-tests', ref => ref.where('nombre', '==', termino)
-    ).valueChanges();
+    // return this.afs.collection<Usuario>(
+    //   'usuarios-tests', ref => ref.where('nombre', '==', termino)
+    // ).valueChanges();
   }
 
   buscarUsuarioId ( id: string ) {
-    return this.afs.collection('usuarios-tests').doc(id).valueChanges();
+    const url = URL_SERVICES + '/usuario/' + id;
+
+    return this.http.get( url ).pipe(
+      map( (resp: any) => {
+        return resp.usuario;
+      }));
   }
 
   // =====================================================================
   // Elimina un usuario
   // =====================================================================
   borrarUsuario( id: string ) {
-    return this.afs.collection('usuarios-tests').doc(id).delete();
+    // return this.afs.collection('usuarios-tests').doc(id).delete();
   }
 
 }

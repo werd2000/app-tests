@@ -57,32 +57,13 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    const usuario = {
-      nombre: this.forma.value.nombre,
-      email: this.forma.value.email,
-      password: this.forma.value.password,
-      img: '',
-      role: 'ROLE_USER',
-      google: false,
-      _id: this.forma.value.email
-    };
+    const usuario = new Usuario(
+      this.forma.value.nombre,
+      this.forma.value.email,
+      this.forma.value.password
+    );
 
-    this._usuarioService.existeUsuarioEmail(usuario.email)
-      .subscribe( async usu => {
-        // console.log(usu);
-        if (usu === null || usu === undefined) {
-          this.existe = false;
-          await this._usuarioService.crearUsuario(usuario)
-            .then(success => {
-              this.router.navigate(['/login']);
-              return;
-            })
-            .catch(err => console.log(err));
-        } else {
-          if ( this.existe && usu != null) {
-            swal('El usuario ya existe', usuario.email, 'error');
-          }
-        }
-      });
+    this._usuarioService.crearUsuario( usuario )
+      .subscribe( resp => this.router.navigate(['/login']) );
   }
 }

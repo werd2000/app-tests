@@ -59,11 +59,11 @@ export class PacienteWiscComponent implements OnInit {
 
   cargarMisPacientes() {
     this.cargando = true;
-    this._pacienteService.cargarPacientesTerapeuta(this.usuario._id)
-      .subscribe( resp => {
-        this.pacientes = resp;
-        this.cargando = false;
-      });
+    // this._pacienteService.cargarPacientesTerapeuta(this.usuario._id)
+    //   .subscribe( resp => {
+    //     this.pacientes = resp;
+    //     this.cargando = false;
+    //   });
   }
 
   buscarPaciente(event: any) {
@@ -133,9 +133,9 @@ export class PacienteWiscComponent implements OnInit {
   }
 
   calcularGrupoEtareo() {
-    if (this.edadEvaluacion <= 6 ) {
+    // if (this.edadEvaluacion <== 6 ) {
       this.test.grupo_etareo = '1';
-    }
+    // }
   }
 
   cambiarFechaEvaluacion(event: any) {
@@ -144,13 +144,13 @@ export class PacienteWiscComponent implements OnInit {
   }
 
   guardarPaciente(f: WiscTomado) {
-    console.log(f);
-    f._id = f.paciente + f.fecha_eval;
-    f.edad_eval = this.edadEvaluacion;
-    this._wiscService.crearWisc(f)
-      .then( resp => {
-        swal('Datos guardados', 'Los datos del test fueron guardados', 'success');
-      });
+    // console.log(f);
+    // f._id = f.paciente + f.fecha_eval;
+    // f.edad_eval = this.edadEvaluacion;
+    // this._wiscService.crearWisc(f)
+    //   .then( resp => {
+    //     swal('Datos guardados', 'Los datos del test fueron guardados', 'success');
+    //   });
   }
 
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Test } from '../../models/test.model';
 import { TestService, UsuarioService } from '../../services/service.index';
 import { Usuario } from '../../models/usuario.model';
+declare var swal: any;
 
 @Component({
   selector: 'app-tests',
@@ -38,37 +39,27 @@ export class TestsComponent implements OnInit {
 
   agregarMisTest(test: Test) {
     if (this.usuario.misTests) {
-      this.usuario.misTests.push(test._id);
+      this.usuario.misTests = this.usuario.misTests + ',' + test._id;
     } else {
-      this.usuario.misTests = [test._id];
+      this.usuario.misTests = test._id;
     }
-    this._usuarioService.actualizarUsuario(this.usuario)
-    .then( () => {
-      this._usuarioService.guardarStorage(this.usuario.email, 'true', this.usuario, '');
-      swal('Mis Tests actualizados', test.nombre, 'success' );
-    })
-    .catch(err => console.log(err));
+
+    this._usuarioService.actualizarUsuario(this.usuario).subscribe();
   }
 
   quitarMisTest(test: Test) {
-    this.usuario.misTests
-      .splice(
-        this.usuario.misTests
-          .findIndex(t => t === test._id), 1
+    const testsArray = this.usuario.misTests.split(',');
+    testsArray.splice(
+        testsArray.findIndex(t => t === test._id), 1
         );
-    // console.log(this.usuario.misTests);
-    this._usuarioService.actualizarUsuario(this.usuario)
-    .then( () => {
-      this._usuarioService.guardarStorage(this.usuario.email, 'true', this.usuario, '');
-      swal('Mis Tests actualizados', test.nombre, 'success' );
-    })
-    .catch(err => console.log(err));
+    this.usuario.misTests = testsArray.join(',');
+    this._usuarioService.actualizarUsuario(this.usuario).subscribe();
   }
 
   esMiTest(test: Test) {
     if (this.usuario.misTests) {
-      // console.log(this.usuario.misTests.findIndex(t => t === test._id));
-      if (this.usuario.misTests.findIndex(t => t === test._id) >= 0) {
+      const testsArray = this.usuario.misTests.split(',');
+      if (testsArray.findIndex(t => t === test._id) >= 0) {
         return 'red';
       } else {
         return 'black';
@@ -79,10 +70,21 @@ export class TestsComponent implements OnInit {
   }
 
   borrarTest(test: Test) {
-    this._testService.borrarTest(test._id)
-      .then( () => {
-        swal('Test borrado', test.nombre, 'success');
-      });
+    swal({
+      title: '¿Está seguro?',
+      text: 'Está por borrar el test ' + test.nombre,
+      icon: 'warning',
+      buttons: true,
+      dangerMode: true
+    }).then ( borrar => {
+      if (borrar != null) {
+        this._testService.borrarTest(test._id)
+        .subscribe( borrado => {
+          this.cargarTests();
+          swal('Test borrado', 'El test ha sido borrado correctamente', 'success');
+        });
+      }
+    });
   }
 
 }

@@ -32,7 +32,7 @@
                 <div class="row p-1">
                     <div class="card col-2 p-0" *ngFor="let test of tests">
                         <a [routerLink]="['../test', test._id]">
-                            <img class="card-img-top img-fluid" [src]="test.img | imagen" width="150">
+                            <img class="card-img-top img-fluid" [src]="test.img | imagen:'test'" width="150">
                         </a>
                         <div class="card-body">
                             <a [routerLink]="['../test', test._id]">

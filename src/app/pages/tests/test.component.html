@@ -4,7 +4,7 @@
         <div class="card border-success" *ngIf="!cargando">
             <div class="card-body">
                 <div class="m-t-30 text-center">
-                    <img *ngIf="!imagenTemp" [src]="test.img | imagen" class="img-circle mb-4" width="150">
+                    <img *ngIf="!imagenTemp" [src]="test.img | imagen:'test'" class="img-circle mb-4" width="150">
                     <img *ngIf="imagenTemp" [src]="imagenTemp" class="img-circle mb-4" width="150">
                     <input (change)="seleccionImagen($event.target.files[0])" type="file" class="mb-3">
                     <button (click)="cambiarImagen()" [disabled]="!imagenSubir" type="button" class="btn btn-outline-success waves-effect waves-light m-r-10">
@@ -28,6 +28,7 @@
                 </h2>
                 <div class="card-body">
                     <form ngNativeValidate #f="ngForm" (ngSubmit)="guardar(f.value)" class="form-horizontal form-material">
+                        <input type="hidden" name="_id" [(ngModel)]="test._id">
 
                         <mat-form-field class="w-100">
                             <span matPrefix>

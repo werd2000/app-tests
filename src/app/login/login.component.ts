@@ -41,14 +41,7 @@ export class LoginComponent implements OnInit {
     const usuario = new Usuario(null, forma.value.email, forma.value.password);
 
     this._usuarioService.login(usuario, forma.value.recuerdame)
-        .subscribe( resp => {
-          if (resp !== undefined) {
-            this._usuarioService.guardarStorage(usuario.email, 'true', resp, '');
-            this.router.navigate(['/dashboard']);
-          } else {
-            swal('Error al ingresar', 'No coinciden las credenciales', 'error');
-          }
-        });
+        .subscribe( resp => this.router.navigate(['/dashboard']) );
   }
 
 }

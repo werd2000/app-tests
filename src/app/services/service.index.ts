@@ -10,7 +10,7 @@ export { PacienteService } from './paciente/paciente.service';
 // export { ModalUploadService } from '../components/modal-upload/modal-upload.service';
 // export { ModalAlumnoService } from '../components/modal-alumno/modal-alumno.service';
 export { SubirArchivoService } from './subir-archivo/subir-archivo.service';
-// export { LoginGuard } from './guards/login-guard.guard';
+export { LoginGuard } from './guards/login-guard.guard';
 // export { AdminGuard } from './guards/admin.guard';
 export { UsuarioService } from './usuario/usuario.service';
 // export { SettingsService } from './settings/settings.service';

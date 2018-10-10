@@ -67,36 +67,19 @@ export class TestComponent implements OnInit {
 
   // Toma el archivo y lo lleva al servicio
   cambiarImagen() {
-    this._testsService.cambiarImagen(this.imagenSubir, this.test);
+    this._testsService.cambiarImagen(this.imagenSubir, this.test._id);
   }
 
   guardar( test: Test ) {
-    test._id = test.nombre;
     if (this.paramId === 'nuevo') {
-      this._testsService.existeTestId(test._id)
-        .subscribe( async pac => {
-          if (pac === null || pac === undefined) {
-            this.existe = false;
-            await this._testsService.crearTest(test)
-              .then( resp => {
-                swal('Test creado', `El test ${test.nombre} se creó correctamente`, 'success');
-                this.route.navigate([`test/${ test._id }`]);
-              })
-              .catch(err => console.log(err));
-          } else {
-            if ( this.existe && pac != null) {
-              swal('El test ya existe', `El test ${ test.nombre } ya existe`, 'warning');
-            }
-          }
+      console.log(test);
+      this._testsService.crearTest(test)
+        .subscribe(resp => {
+          this.route.navigate(['test/' + resp.test._id]);
         });
-
     } else {
       test.img = this.test.img;
-      // test.domicilio = this.test.domicilio;
-      this._testsService.actualizarTest(test)
-        .then( resp => {
-          swal('Test actualizado', `El test ${ test.nombre } se actualizó correctamente`, 'success');
-        });
+      this._testsService.actualizarTest(test).subscribe();
       }
   }
 

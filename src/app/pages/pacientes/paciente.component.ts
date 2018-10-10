@@ -47,7 +47,7 @@ export class PacienteComponent implements OnInit {
       if (this.paramId !== 'nuevo') {
         this.cargarPaciente(this.paramId);
       } else {
-        this.paciente = new Paciente('', '', '', '', '', '', '', '');
+        this.paciente = new Paciente('', '', '', '', '', '', this.usuario._id, '');
       }
     });
   }
@@ -55,7 +55,6 @@ export class PacienteComponent implements OnInit {
   cargarPaciente( id: string ) {
     this.cargando = true;
     this._pacienteService.obtenerPacienteId(id)
-      // .pipe( map(res => res[0] ))
         .subscribe( (resp: any) => {
           if (resp === undefined) {
             this.paciente = new Paciente('', '', '', '', '', '', this.usuario._id, '');
@@ -63,6 +62,7 @@ export class PacienteComponent implements OnInit {
             this.paciente = resp;
           }
           this.cargando = false;
+          // console.log(this.paciente);
         });
   }
 
@@ -85,42 +85,24 @@ export class PacienteComponent implements OnInit {
 
   // Toma el archivo y lo lleva al servicio
   cambiarImagen() {
-    this._pacienteService.cambiarImagen(this.imagenSubir, this.paciente);
+    this._pacienteService.cambiarImagen(this.imagenSubir, this.paciente._id);
   }
 
   guardar( paciente: Paciente ) {
-    paciente._id = this.usuario._id + paciente.nro_doc;
-    const fecha = new Date(paciente.fecha_nac).toISOString();
-    paciente.fecha_nac = fecha.split('T')[0];
     paciente.cargado_por = this.usuario._id;
+    paciente._id = this.paciente._id;
     const fechaHoy = new Date().toISOString();
-    paciente.actualizado = fechaHoy.split('T')[0];
+    paciente.actualizado = fechaHoy;
+    console.log(paciente);
     if (this.paramId === 'nuevo') {
-      this._pacienteService.existePacienteId(paciente._id)
-        .subscribe( async pac => {
-          if (pac === null || pac === undefined) {
-            this.existe = false;
-            await this._pacienteService.crearPaciente(paciente)
-              .then( resp => {
-                swal('Paciente creado', `El paciente ${ paciente.nombre } se creó correctamente`, 'success');
-                this.route.navigate([`paciente/${ paciente._id }`]);
-              })
-              .catch(err => console.log(err));
-          } else {
-            if ( this.existe && pac != null) {
-              swal('El paciente ya existe', `El paciente ${ paciente.nro_doc } ya existe`, 'warning');
-            }
-          }
+      // console.log('crear');
+      this._pacienteService.crearPaciente(paciente)
+        .subscribe(resp => {
+          this.route.navigate(['paciente/' + resp.paciente._id]);
         });
-
     } else {
-      paciente.img = this.paciente.img;
-      // paciente.domicilio = this.paciente.domicilio;
-      this._pacienteService.actualizarPaciente(paciente)
-        .then( resp => {
-          swal('Paciente actualizado', `El paciente ${ paciente.nombre } se actualizó correctamente`, 'success');
-        });
-      }
+      this._pacienteService.actualizarPaciente(paciente).subscribe();
+    }
   }
 
   crearNuevo() {

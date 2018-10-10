@@ -13,7 +13,7 @@ export class ProfileComponent implements OnInit {
   usuario: Usuario;
   imagenSubir: File;
   imagenTemp: string;
-  listaSexos = ['Varón', 'Mujer'];
+  listaSexos = ['VARON', 'MUJER'];
   startDate = new Date(1980, 0, 1);
 
   constructor( public _usuarioService: UsuarioService ) {
@@ -24,15 +24,11 @@ export class ProfileComponent implements OnInit {
   }
 
   guardar( usuario: Usuario ) {
-    this.usuario.nombre = usuario.nombre;
-    // lo saco porque no debe modificar el email
-    // this.usuario.email = usuario.email;
-    this._usuarioService.actualizarUsuario(this.usuario)
-      .then( () => {
-        this._usuarioService.guardarStorage(this.usuario.email, 'true', this.usuario, '');
-        swal('Datos actualizados', this.usuario.nombre, 'success' );
-      })
-      .catch(err => console.log(err));
+
+    this._usuarioService.actualizarUsuario( usuario )
+      .subscribe( resp => {
+        console.log(resp);
+      });
   }
 
   seleccionImagen( archivo: File ) {
@@ -55,7 +51,7 @@ export class ProfileComponent implements OnInit {
 
   // Toma el archivo y lo lleva al servicio
   cambiarImagen() {
-    this._usuarioService.cambiarImagen(this.imagenSubir, this.usuario);
+    this._usuarioService.cambiarImagen(this.imagenSubir, this.usuario._id);
   }
 
 }

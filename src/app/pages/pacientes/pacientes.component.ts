@@ -4,6 +4,7 @@ import { PacienteService, UsuarioService } from '../../services/service.index';
 // import { ModalUploadService } from '../../components/modal-upload/modal-upload.service';
 // import { ModalAlumnoService } from '../../components/modal-alumno/modal-alumno.service';
 import { Usuario } from '../../models/usuario.model';
+import { ActivatedRoute, Router } from '@angular/router';
 declare var swal: any;
 
 @Component({
@@ -20,7 +21,8 @@ export class PacientesComponent implements OnInit {
 
   constructor(
     public _pacientesService: PacienteService,
-    public _usuarioService: UsuarioService
+    public _usuarioService: UsuarioService,
+    public route: Router
   ) {}
 
   ngOnInit() {
@@ -30,12 +32,17 @@ export class PacientesComponent implements OnInit {
 
   cargarPacientes() {
     this.cargando = true;
-    this._pacientesService.cargarPacientesTerapeuta(this.usuario._id)
-      .subscribe( resp => {
+    let pac;
+    if (this.usuario.role === 'TERAPEUTA_ROLE' || this.usuario.role === 'USER_ROLE') {
+      pac = this._pacientesService.cargarPacientesTerapeuta(this.usuario._id);
+    } else {
+      pac = this._pacientesService.cargarPacientes();
+    }
+    pac.subscribe( resp => {
         this.pacientes = resp;
         this.totalRegistros = this.pacientes.length;
-        this.cargando = false;
       });
+    this.cargando = false;
   }
 
   borrarPaciente(pac: Paciente) {
@@ -48,7 +55,8 @@ export class PacientesComponent implements OnInit {
     }).then ( borrar => {
       if (borrar != null) {
         this._pacientesService.borrarPaciente( pac._id )
-          .then( borrado => {
+          .subscribe( borrado => {
+              this.cargarPacientes();
               swal('Paciente borrado', 'El paciente ha sido borrado correctamente', 'success');
             });
       }

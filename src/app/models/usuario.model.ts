@@ -9,6 +9,7 @@ export class Usuario {
         public role?: string,
         public google?: boolean,
         public _id?: string,
-        public misTests?: string[]
+        public misTests?: string,
+        public estado: boolean = true
     ) { }
 }
