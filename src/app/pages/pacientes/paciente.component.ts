@@ -93,7 +93,6 @@ export class PacienteComponent implements OnInit {
     paciente._id = this.paciente._id;
     const fechaHoy = new Date().toISOString();
     paciente.actualizado = fechaHoy;
-    console.log(paciente);
     if (this.paramId === 'nuevo') {
       // console.log('crear');
       this._pacienteService.crearPaciente(paciente)

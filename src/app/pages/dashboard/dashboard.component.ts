@@ -27,10 +27,18 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.cargando = true;
     this.usuario = this._usuarioService.usuario;
-    this.cargarNuevosTests();
+    this.cargarNuevosTests().subscribe( resp => {
+      this.nuevosTests = resp;
+      this.totalNuevosTests = this.nuevosTests.length;
+    });
     // this.cargarTests();
-    this.cargarPacientes();
+    this.cargarPacientes().subscribe( resp => {
+      this.pacientes = resp;
+      this.totalRegistros = this.pacientes.length;
+      this.cargando = false;
+    });
   }
 
   // Carga los test del usuario
@@ -50,12 +58,7 @@ export class DashboardComponent implements OnInit {
   // Carga los tests nuevos
   cargarNuevosTests() {
     this.cargando = true;
-    this._testService.cargarTests()
-      .subscribe( resp => {
-      this.nuevosTests = resp;
-      this.totalNuevosTests = this.nuevosTests.length;
-      this.cargando = false;
-    });
+    return this._testService.cargarTests();
   }
 
   cargarPacientes() {
@@ -66,11 +69,7 @@ export class DashboardComponent implements OnInit {
     } else {
       pac = this._pacientesService.cargarPacientes();
     }
-      pac.subscribe( resp => {
-        this.pacientes = resp;
-        this.totalRegistros = this.pacientes.length;
-        this.cargando = false;
-      });
+    return pac;
   }
 
 }

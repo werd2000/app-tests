@@ -106,7 +106,6 @@ export class PacienteService {
   // =====================================================================
   actualizarPaciente( paciente: Paciente ) {
     const url = URL_SERVICES + '/paciente/' + paciente._id;
-    console.log(url);
     return this.http.put(url, paciente, this.httpOptions).pipe(
       map( (res: any) => {
         swal('Paciente actualizado', paciente.apellido, 'success');

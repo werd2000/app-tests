@@ -1,14 +1,15 @@
 <div class="container p-2" *ngIf="!cargando">
     <div class="row justify-content-md-center">
-        <div class="col-10 align-self-center">
+        <div class="col-10 align-self-center p-3">
             <form ngNativeValidate #f="ngForm" (ngSubmit)="guardarPaciente(f.value)" class="form-horizontal">
+                <label for="paciente">Seleccione un paciente</label>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <label class="input-group-text" for="inputGroupSelect01">
                             <i class="far fa-id-card"></i>
                         </label>
                     </div>
-                    <select class="custom-select" [ngModel]="test.paciente" name="paciente" (change)="buscarPaciente($event)">
+                    <select class="custom-select" name="paciente" [ngModel]="test.paciente._id" (change)="buscarPac($event)" *ngIf="test">
                         <option *ngFor="let pac of pacientes" [value]="pac._id">
                             {{ pac.apellido }}, {{ pac.nombre }}
                         </option>
@@ -17,17 +18,17 @@
 
                 <div *ngIf="paciente">
                     <div class="form-group">
-                        <label for="Fecha Nacimiento"></label>
-                        <input type="date" [value]="paciente.fecha_nac" class="form-control" name="fecha_nac" id="fecha_nac">
+                        <label for="Fecha Nacimiento">Fecha de Nacimiento</label>
+                        <input type="date" [value]="paciente.fecha_nac" class="form-control" name="fecha_nac" id="fecha_nac" disabled=true>
                     </div>
 
                     <div class="form-group">
-                        <label for="Fecha Evaluación"></label>
+                        <label for="Fecha Evaluación">Fecha de Evaluación</label>
                         <input type="date" [ngModel]="test.fecha_eval" class="form-control" name="fecha_eval" id="fecha_eval" (change)="cambiarFechaEvaluacion($event)">
                     </div>
 
                     <div class="detalle" *ngIf="edadEvaluacion">
-                        <p>Edad de la evaluación: {{ edadEvaluacion['anios'] }} años {{ edadEvaluacion['meses'] }} meses {{ edadEvaluacion['dias'] }} días
+                        <p>Edad del paciente a la fecha de evaluación: {{ edadEvaluacion['anios'] }} años {{ edadEvaluacion['meses'] }} meses
                         </p>
                     </div>
 

@@ -83,7 +83,6 @@ export class TestService {
   // Actualiza un test por Id
   // =====================================================================
   actualizarTest( test: Test ) {
-    console.log(this.httpOptions);
     const url = URL_SERVICES + '/test/' + test._id;
     return this.http.put(url, test, this.httpOptions).pipe(
       map( (res: any) => {

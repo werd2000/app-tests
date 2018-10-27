@@ -19,6 +19,8 @@ import { TestComponent } from './tests/test.component';
 import { WiscComponent } from './wisc/wisc.component';
 import { PacienteWiscComponent } from './wisc/paciente-wisc.component';
 import { PuntuacionesEscalaresComponent } from './wisc/puntuaciones-escalares.component';
+import { PruebasrealizadasComponent } from './wisc/pruebasrealizadas.component';
+import { PuntuacionesIndicesComponent } from './wisc/puntuaciones-indices.component';
 
 
 
@@ -64,7 +66,9 @@ import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
         TestComponent,
         WiscComponent,
         PacienteWiscComponent,
-        PuntuacionesEscalaresComponent
+        PuntuacionesEscalaresComponent,
+        PruebasrealizadasComponent,
+        PuntuacionesIndicesComponent
         // AccountSettingsComponent,
         // UsuariosComponent,
         // ListarAlumnosComponent,

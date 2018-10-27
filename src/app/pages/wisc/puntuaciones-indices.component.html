@@ -1,0 +1,52 @@
+<div class="container p-2" *ngIf="!cargando">
+    <div class="row">
+        <div class="col-12 align-self-center">
+            <h2>Puntuaciones Indice</h2>
+            <form ngNativeValidate #f="ngForm" (ngSubmit)="guardarPuntuacionesIndice(f.value)" class="form-horizontal">
+                <div class="form-group">
+                    <select name="grupoEtareo">
+                      <option *ngFor="let item of listaGruposEtareos" [value]="item">{{item.valor}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select name="prueba" id="prueba" class="form-control">
+                      <option value="DC">Diseño con Cubos - DC</option>
+                      <option value="SE">Semejanzas - SE</option>
+                      <option value="RD">Retención de Dígitos - RD</option>
+                      <option value="RD">Conceptos con Dibujos - CD</option>
+                      <option value="RD">Claves - CL</option>
+                      <option value="RD">Vocabulario - VB</option>
+                      <option value="RD">Sucesión de Números y Letras - NL</option>
+                      <option value="RD">Matrices - MT</option>
+                      <option value="RD">Comprensión - CM</option>
+                      <option value="RD">Búsqueda de símbolos - BS</option>
+                      <option value="RD">Figuras incompletas (FI)</option>
+                      <option value="RD">Registros (RG)</option>
+                      <option value="RD">Información (IN)</option>
+                      <option value="RD">Aritmética (AR)</option>
+                      <option value="RD">Palabras en contexto (PC)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="min">Mínimo</label>
+                    <input type="text" name="min" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="max">Máximo</label>
+                    <input type="text" name="max" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="pe">Puntuación Escalar</label>
+                    <input type="text" name="pe" class="form-control">
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <button class="btn btn-success btn-block">
+                    <i class="fa fa-save"></i>
+                    Guardar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+<div *ngIf="cargando" class="row animated fadeIn">
+    <div class="col-sm-12">
+        <div class="alert alert-warning text-center">
+            <h3 class="mb-1">Cargando</h3>
+            <i class="fa fa-refresh fa-spin fa-2x"></i>
+            <p class="mt-1">Espere por favor</p>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="!cargando" class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-block bg-info">
+                <div class="row p-1">
+                    <div class="col-8 m-auto">
+                        <h5 class="card-title text-white m-auto">
+                            Pruebas realizadas
+                            <span class="badge badge-primary badge-pill">{{ totalRegistros }}</span>
+                        </h5>
+                    </div>
+                    <div class="col-4 text-right">
+                        <button [routerLink]="['/wisc', 'nuevo']" class="btn btn-danger">
+                            <i class="fa fa-plus-circle"></i>
+                            Agregar Test
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-block p-3">
+
+                <div class="row p-1">
+                    <div class="card col-2 p-0" *ngFor="let prueba of pruebasRealizadas">
+                        <a [routerLink]="['../wisc', prueba._id]">
+                            <img class="card-img-top img-fluid" [src]="prueba.paciente.img | imagen:'paciente'" width="150">
+                        </a>
+                        <div class="card-body">
+                            <a [routerLink]="['../wisc', prueba._id]">
+                                <h6 class="card-title">{{ prueba.paciente.apellido }}, {{ prueba.paciente.nombre }}</h6>
+                            </a>
+                            <p class="card-text">Fecha de Evaluación: {{ prueba.fecha_eval }}</p>
+                            <p class="card-text">Edad Evaluación: {{ prueba.edad_eval }}</p>
+                            <p class="card-text">Edad Mental: {{ prueba.edad_mental }}</p>
+
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">
+                                <a (click)="borrarPrueba(prueba)">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </a>
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

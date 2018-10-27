@@ -7,14 +7,13 @@
                         <tr>
                             <th class="w-auto">Sub-prueba</th>
                             <th></th>
-                            <th>Puntaje bruto</th>
-                            <th>Verbal</th>
-                            <th>Ejec.</th>
+                            <th>P. Obtenido</th>
+                            <th>Puntaje natural</th>
                             <th>CV</th>
-                            <th>OP</th>
-                            <th>MO</th>
+                            <th>RP</th>
+                            <th>MO/MT</th>
                             <th>VP</th>
-                            <th>P. E. Grupo Ref.</th>
+                            <th>P. Total</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -22,13 +21,16 @@
                             <td>Diseño con cubos</td>
                             <td>DC</td>
                             <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.dc_puntajeobtenido" name="dc_puntajeobtenido" id="dc_puntajeobtenido" (change)="calcularDc($event)" (blur)="calcularTotalRp()" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" [ngModel]="pe.dc_puntajenatural" name="dc_puntajenatural" class="form-control">
                             </td>
                             <td>
                                 <input type="text" class="form-control" disabled="disabled">
                             </td>
                             <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.dc_rp" name="dc_rp" id="dc_rp" class="form-control">
                             </td>
                             <td>
                                 <input type="text" class="form-control" disabled="disabled">
@@ -37,23 +39,23 @@
                                 <input type="text" class="form-control" disabled="disabled">
                             </td>
                             <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control" disabled="disabled">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.dc_total" name="dc_total" class="form-control">
                             </td>
                         </tr>
                         <tr>
                             <td>Semejanzas</td>
                             <td>SE</td>
                             <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.se_puntajeobtenido" name="se_puntajeobtenido" id="se_puntajeobtenido" (change)="calcularSe($event)" (blur)="calcularTotalCv()" class="form-control">
                             </td>
                             <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.se_puntajenatural" name="se_puntajenatural" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" [ngModel]="pe.se_cv" name="se_cv" id="se_cv" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
                             </td>
                             <td>
                                 <input type="text" class="form-control" disabled="disabled">
@@ -62,23 +64,17 @@
                                 <input type="text" class="form-control" disabled="disabled">
                             </td>
                             <td>
-                                <input type="text" class="form-control" disabled="disabled">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control" disabled="disabled">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.se_total" name="se_total" class="form-control">
                             </td>
                         </tr>
                         <tr>
                             <td>Retención de dígitos</td>
                             <td>RD</td>
                             <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.rd_puntajeobtenido" name="rd_puntajeobtenido" id="rd_puntajeobtenido" (change)="calcularRd($event)" (blur)="calcularTotalMt()" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" [ngModel]="pe.rd_puntajenatural" name="rd_puntajenatural" class="form-control">
                             </td>
                             <td>
                                 <input type="text" class="form-control" disabled="disabled">
@@ -87,32 +83,29 @@
                                 <input type="text" class="form-control" disabled="disabled">
                             </td>
                             <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.rd_mt" name="rd_mt" id="rd_mt" class="form-control">
                             </td>
                             <td>
                                 <input type="text" class="form-control" disabled="disabled">
                             </td>
                             <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control" disabled="disabled">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.rd_total" name="rd_total" class="form-control">
                             </td>
                         </tr>
                         <tr>
                             <td>Conceptos con dibujos</td>
                             <td>CD</td>
                             <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.cd_puntajeobtenido" name="cd_puntajeobtenido" id="cd_puntajeobtenido" class="form-control" (change)="calcularCd($event)" (blur)="calcularTotalRp()">
+                            </td>
+                            <td>
+                                <input type="text" [ngModel]="pe.cd_puntajenatural" name="cd_puntajenatural" class="form-control">
                             </td>
                             <td>
                                 <input type="text" class="form-control" disabled="disabled">
                             </td>
                             <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.cd_rp" name="cd_rp" id="cd_rp" class="form-control">
                             </td>
                             <td>
                                 <input type="text" class="form-control" disabled="disabled">
@@ -121,20 +114,17 @@
                                 <input type="text" class="form-control" disabled="disabled">
                             </td>
                             <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control" disabled="disabled">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.cd_total" name="cd_total" class="form-control">
                             </td>
                         </tr>
                         <tr>
                             <td>Claves</td>
                             <td>CL</td>
                             <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.cl_puntajeobtenido" name="cl_puntajeobtenido" id="cl_puntajeobtenido" (change)="calcularCl($event)" (blur)="calcularTotalVp()" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" [ngModel]="pe.cl_puntajenatural" name="cl_puntajenatural" class="form-control">
                             </td>
                             <td>
                                 <input type="text" class="form-control" disabled="disabled">
@@ -146,26 +136,26 @@
                                 <input type="text" class="form-control" disabled="disabled">
                             </td>
                             <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.cl_vp" name="cl_vp" id="cl_vp" class="form-control">
                             </td>
                             <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control" disabled="disabled">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.cl_total" name="cl_total" class="form-control">
                             </td>
                         </tr>
                         <tr>
                             <td>Vocabulario</td>
                             <td>VB</td>
                             <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.vb_puntajeobtenido" name="vb_puntajeobtenido" id="vb_puntajeobtenido" (change)="calcularVb($event)" (blur)="calcularTotalCv()" class="form-control">
                             </td>
                             <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.vb_puntajenatural" name="vb_puntajenatural" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" [ngModel]="pe.vb_cv" name="vb_cv" id="vb_cv" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
                             </td>
                             <td>
                                 <input type="text" class="form-control" disabled="disabled">
@@ -174,23 +164,17 @@
                                 <input type="text" class="form-control" disabled="disabled">
                             </td>
                             <td>
-                                <input type="text" class="form-control" disabled="disabled">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control" disabled="disabled">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.vb_total" name="vb_total" class="form-control">
                             </td>
                         </tr>
                         <tr>
                             <td>Sucesión de números y letras</td>
                             <td>NL</td>
                             <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.nl_puntajeobtenido" name="nl_puntajeobtenido" id="nl_puntajeobtenido" (change)="calcularNl($event)" (blur)="calcularTotalMt()" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" [ngModel]="pe.nl_puntajenatural" name="nl_puntajenatural" class="form-control">
                             </td>
                             <td>
                                 <input type="text" class="form-control" disabled="disabled">
@@ -199,32 +183,29 @@
                                 <input type="text" class="form-control" disabled="disabled">
                             </td>
                             <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.nl_mt" name="nl_mt" id="nl_mt" class="form-control">
                             </td>
                             <td>
                                 <input type="text" class="form-control" disabled="disabled">
                             </td>
                             <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control" disabled="disabled">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.nl_total" name="nl_total" class="form-control">
                             </td>
                         </tr>
                         <tr>
                             <td>Matrices</td>
                             <td>MT</td>
                             <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.mt_puntajeobtenido" name="mt_puntajeobtenido" id="mt_puntajeobtenido" class="form-control" (change)="calcularMt($event)" (blur)="calcularTotalRp()">
+                            </td>
+                            <td>
+                                <input type="text" [ngModel]="pe.mt_puntajenatural" name="mt_puntajenatural" class="form-control">
                             </td>
                             <td>
                                 <input type="text" class="form-control" disabled="disabled">
                             </td>
                             <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.mt_rp" name="mt_rp" id="mt_rp" class="form-control">
                             </td>
                             <td>
                                 <input type="text" class="form-control" disabled="disabled">
@@ -233,23 +214,23 @@
                                 <input type="text" class="form-control" disabled="disabled">
                             </td>
                             <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control" disabled="disabled">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.mt_total" name="mt_total" class="form-control">
                             </td>
                         </tr>
                         <tr>
                             <td>Comprensión</td>
                             <td>CM</td>
                             <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.cm_puntajeobtenido" name="cm_puntajeobtenido" id="cm_puntajeobtenido" (change)="calcularCm($event)" (blur)="calcularTotalCv()" class="form-control">
                             </td>
                             <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.cm_puntajenatural" name="cm_puntajenatural" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" [ngModel]="pe.cm_cv" name="cm_cv" id="cm_cv" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
                             </td>
                             <td>
                                 <input type="text" class="form-control" disabled="disabled">
@@ -258,23 +239,17 @@
                                 <input type="text" class="form-control" disabled="disabled">
                             </td>
                             <td>
-                                <input type="text" class="form-control" disabled="disabled">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control" disabled="disabled">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.cm_total" name="cm_total" class="form-control">
                             </td>
                         </tr>
                         <tr>
                             <td>Búsqueda símbolos</td>
                             <td>BS</td>
                             <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.bs_puntajeobtenido" name="bs_puntajeobtenido" id="bs_puntajeobtenido" (change)="calcularBs($event)" (blur)="calcularTotalVp()" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" [ngModel]="pe.bs_puntajenatural" name="bs_puntajenatural" class="form-control">
                             </td>
                             <td>
                                 <input type="text" class="form-control" disabled="disabled">
@@ -286,29 +261,26 @@
                                 <input type="text" class="form-control" disabled="disabled">
                             </td>
                             <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.bs_vp" name="bs_vp" id="bs_vp" class="form-control">
                             </td>
                             <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control" disabled="disabled">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.bs_total" name="bs_total" class="form-control">
                             </td>
                         </tr>
                         <tr>
                             <td>(Figuras incompletas)</td>
                             <td>FI</td>
                             <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.fi_puntajeobtenido" name="fi_puntajeobtenido" id="fi_puntajeobtenido" class="form-control" (change)="calcularFi($event)" (blur)="calcularTotalRp()">
+                            </td>
+                            <td>
+                                <input type="text" [ngModel]="pe.fi_puntajenatural" name="fi_puntajenatural" class="form-control">
                             </td>
                             <td>
                                 <input type="text" class="form-control" disabled="disabled">
                             </td>
                             <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.fi_rp" name="fi_rp" id="fi_rp" class="form-control">
                             </td>
                             <td>
                                 <input type="text" class="form-control" disabled="disabled">
@@ -317,20 +289,17 @@
                                 <input type="text" class="form-control" disabled="disabled">
                             </td>
                             <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control" disabled="disabled">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.fi_total" name="fi_total" class="form-control">
                             </td>
                         </tr>
                         <tr>
                             <td>(Registros)</td>
                             <td>RG</td>
                             <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.rg_puntajeobtenido" name="rg_puntajeobtenido" id="rg_puntajeobtenido" (change)="calcularRg($event)" (blur)="calcularTotalVp()" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" [ngModel]="pe.rg_puntajenatural" name="rg_puntajenatural" class="form-control">
                             </td>
                             <td>
                                 <input type="text" class="form-control" disabled="disabled">
@@ -342,26 +311,26 @@
                                 <input type="text" class="form-control" disabled="disabled">
                             </td>
                             <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.rg_vp" name="rg_vp" id="rg_vp" class="form-control">
                             </td>
                             <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control" disabled="disabled">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.rg_total" name="rg_total" class="form-control">
                             </td>
                         </tr>
                         <tr>
                             <td>(Información)</td>
                             <td>IN</td>
                             <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.in_puntajeobtenido" name="in_puntajeobtenido" id="in_puntajeobtenido" (change)="calcularIn($event)" (blur)="calcularTotalCv()" class="form-control">
                             </td>
                             <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.in_puntajenatural" name="in_puntajenatural" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" [ngModel]="pe.in_cv" name="in_cv" id="in_cv" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
                             </td>
                             <td>
                                 <input type="text" class="form-control" disabled="disabled">
@@ -370,23 +339,17 @@
                                 <input type="text" class="form-control" disabled="disabled">
                             </td>
                             <td>
-                                <input type="text" class="form-control" disabled="disabled">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control" disabled="disabled">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.in_total" name="in_total" class="form-control">
                             </td>
                         </tr>
                         <tr>
                             <td>(Aritmética)</td>
                             <td>AR</td>
                             <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.ar_puntajeobtenido" name="ar_puntajeobtenido" id="ar_puntajeobtenido" (change)="calcularAr($event)" (blur)="calcularTotalMt()" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" [ngModel]="pe.ar_puntajenatural" name="ar_puntajenatural" class="form-control">
                             </td>
                             <td>
                                 <input type="text" class="form-control" disabled="disabled">
@@ -395,29 +358,29 @@
                                 <input type="text" class="form-control" disabled="disabled">
                             </td>
                             <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.ar_mt" name="ar_mt" id="ar_mt" class="form-control">
                             </td>
                             <td>
                                 <input type="text" class="form-control" disabled="disabled">
                             </td>
                             <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control" disabled="disabled">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.ar_total" name="ar_total" class="form-control">
                             </td>
                         </tr>
                         <tr>
                             <td>(Palabras en contexto)</td>
                             <td>PC</td>
                             <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.pc_puntajeobtenido" name="pc_puntajeobtenido" id="pc_puntajeobtenido" (change)="calcularPc($event)" (blur)="calcularTotalCv()" class="form-control">
                             </td>
                             <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.pc_puntajenatural" name="pc_puntajenatural" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" [ngModel]="pe.pc_cv" name="pc_cv" id="pc_cv" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled="disabled">
                             </td>
                             <td>
                                 <input type="text" class="form-control" disabled="disabled">
@@ -426,23 +389,39 @@
                                 <input type="text" class="form-control" disabled="disabled">
                             </td>
                             <td>
-                                <input type="text" class="form-control" disabled="disabled">
+                                <input type="text" [ngModel]="pe.pc_total" name="pc_total" class="form-control">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Suma de PE</td>
+                            <td>Suma</td>
+                            <td>
+                                <input type="text" name="suma_ejec" class="form-control" disabled>
                             </td>
                             <td>
-                                <input type="text" class="form-control">
+                                <input type="text" name="suma_puntajenatural" class="form-control" disabled>
                             </td>
                             <td>
-                                <input type="text" class="form-control" disabled="disabled">
+                                <input type="text" [ngModel]="pe.suma_cv" name="suma_cv" id="suma_cv" class="form-control">
                             </td>
                             <td>
-                                <input type="text" class="form-control">
+                                <input type="text" [ngModel]="pe.suma_rp" name="suma_op" id="suma_op" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" [ngModel]="pe.suma_mt" name="suma_mt" id="suma_mt" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" [ngModel]="pe.suma_vp" name="suma_vp" id="suma_vp" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" [ngModel]="pe.suma_total" name="suma_total" class="form-control">
                             </td>
                         </tr>
                     </tbody>
                 </table>
                 <div class="form-group">
                     <div class="col-sm-12">
-                        <button class="btn btn-success btn-block" [disabled]="!paciente">
+                        <button class="btn btn-success btn-block">
                     <i class="fa fa-save"></i>
                     Guardar</button>
                     </div>

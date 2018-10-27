@@ -72,7 +72,6 @@ export class TestComponent implements OnInit {
 
   guardar( test: Test ) {
     if (this.paramId === 'nuevo') {
-      console.log(test);
       this._testsService.crearTest(test)
         .subscribe(resp => {
           this.route.navigate(['test/' + resp.test._id]);

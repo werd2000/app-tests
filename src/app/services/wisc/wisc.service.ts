@@ -1,68 +1,92 @@
 import { Injectable } from '@angular/core';
 import { WiscTomado } from '../../models/wiscTomado.model';
-import { AngularFirestoreDocument, AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
 import { Router } from '@angular/router';
+import { URL_SERVICES } from 'src/app/config/config';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { UsuarioService } from '../usuario/usuario.service';
+import { map } from 'rxjs/internal/operators/map';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WiscService {
 
-  private wiscDoc: AngularFirestoreDocument<WiscTomado>;
-  private wiscCollection: AngularFirestoreCollection<WiscTomado>;
   public listaWics: WiscTomado[] = [];
   public wisc: WiscTomado;
+  public token: string;
+  private httpOptions;
 
   constructor(
     public router: Router,
-    public afs: AngularFirestore
+    public http: HttpClient,
+    private _usuarioService: UsuarioService
   ) {
-    this.wiscCollection = afs.collection<WiscTomado>('wisc-tomado');
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'token': this._usuarioService.token
+      })
+    };
+    this.cargarListaWics();
   }
 
   // ======================================================
   // Obtiene la lista de tests
   // ======================================================
   cargarListaWics() {
-    return this.wiscCollection.valueChanges();
+    const url = URL_SERVICES + '/wiscadministrado';
+    return this.http.get(url, this.httpOptions ).pipe(
+      map( (resp: any) => {
+        return resp.wiscAdministrado;
+      }));
+
   }
 
   obtenerWicsId(id: string) {
-    return this.afs.collection('wics-tomado').doc(id).valueChanges();
+    const url = URL_SERVICES + '/wiscadministrado/' + id;
+    return this.http.get(url, this.httpOptions ).pipe(
+      map( (resp: any) => {
+        return resp.wiscAdministrado;
+      }));
   }
 
   // =====================================================================
   // Elimina un test por id
   // =====================================================================
   borrarWisc(id: string) {
-    return this.afs.collection('wics-tomado').doc(id).delete();
+    const url = URL_SERVICES + '/wiscadministrado/' + id;
+    return this.http.delete(url, this.httpOptions ).pipe(
+      map( (resp: any) => {
+        return resp.wiscBorrado;
+      }));
   }
 
   crearWisc( wisc: WiscTomado ) {
-    return this.afs.collection('wisc-tomado').doc(wisc._id).set(wisc);
+    const url = URL_SERVICES + '/wiscadministrado';
+    return this.http.post(url, wisc, this.httpOptions ).pipe(
+      map( (resp: any) => {
+        return resp.wiscAdministrado;
+      }));
   }
 
   // =====================================================================
   // Busca un test por un término de búsqueda
   // =====================================================================
-  buscarWisc( termino: string ) {
-    return this.afs.collection<WiscTomado>(
-      'wisc-tomado', ref => ref.where('paciente', '==', termino)
-    ).valueChanges();
-  }
+  // buscarWisc( termino: string ) {
+  //   return this.afs.collection<WiscTomado>(
+  //     'wisc-tomado', ref => ref.where('paciente', '==', termino)
+  //   ).valueChanges();
+  // }
 
   // =====================================================================
   // Actualiza un test por Id
   // =====================================================================
   actualizarWisc( wisc: WiscTomado ) {
-    return this.afs.collection('wisc-tomado').doc(wisc._id).set(wisc);
+    const url = URL_SERVICES + '/wiscadministrado/' + wisc._id;
+    return this.http.put(url, wisc, this.httpOptions ).pipe(
+      map( (resp: any) => {
+        return resp.wiscGuardado;
+      }));
   }
 
-  // =====================================================================
-  // Busca un test por Id
-  // =====================================================================
-  existeWiscId(id: string) {
-    this.wiscDoc = this.afs.doc<WiscTomado>(`wisc-tomado/${id}`);
-    return this.wiscDoc.valueChanges();
-  }
 }
